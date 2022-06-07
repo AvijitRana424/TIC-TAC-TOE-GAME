@@ -1,0 +1,339 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="icon" href="myicon.png" sizes="16x16">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            height: 450px;
+            width: 470px;
+            border-radius: 15px;
+            padding: 5px 5px;
+            padding-top: 15px;
+        }
+        .box{
+            background-color:#78F6AD;
+            height: 135px;
+            width: 135px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box:hover{
+            opacity: 0.6;
+            background-color: green;
+        }
+        .zero{
+            color: white;
+            font-size: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: none;
+        }
+        .cross{
+            color: white;
+            font-size: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: none;
+        }
+        .awin{
+            background-color: rgb(25, 207, 25);
+            width: 400px;
+            height: 100px;
+            padding: 25px 53px;
+            font-size: 40px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            display: none;
+            position: absolute;
+            border-radius: 10px;
+            top: 39.7%;
+            left: 1.6%;
+            animation: change 4s infinite;
+            -webkit-animation: change 4s infinite;
+            -o-animation: change 4s infinite;
+            -moz-animation: change 4s infinite;
+        }
+        @keyframes change{
+            0%{background-color: rgb(25, 207, 25);}
+            20%{background-color: #91F291;}
+            40%{background-color: #10A710;}
+            60%{background-color: #08F408;}
+            80%{background-color: #86F786;}
+            100%{background-color: rgb(25, 207, 25);}
+        }
+        .bwin{
+            background-color: rgb(207, 25, 131);
+            width: 400px;
+            height: 100px;
+            padding: 25px 57px;
+            font-size: 40px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            position: absolute;
+            top: 39.7%;
+            left: 69%;
+            font-weight: bold;
+            border-radius: 10px;
+            display: none;
+            animation: changeb 4s infinite;
+            animation: changeb 4s infinite;
+            -webkit-animation: changeb 4s infinite;
+            -o-animation: changeb 4s infinite;
+            -moz-animation: changeb 4s infinite;
+            text-align: center;
+        }
+
+        @keyframes changeb{
+            0%{background-color: rgb(207, 25, 131);}
+            20%{background-color: #EB4DA3;}
+            40%{background-color: #E880B8;}
+            60%{background-color: #D00774;}
+            80%{background-color: #AF236F;}
+            100%{background-color: rgb(207, 25, 131);}
+
+        }
+        .newgame{
+            border: none;
+            padding: 18px 18px;
+            margin-top: 16px;
+            background-color: rgb(138, 52, 219);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media screen and (max-width:500px){
+            .main{
+                height: 300px;
+                width: 300px;
+            }
+            .box{
+                height: 85px;
+                width: 85px;
+            }
+            .awin, .bwin{
+                width: 400px;
+                height: 90px;
+                top: 40%;
+                left: 0;
+                font-size: 40px;
+
+            }
+        }
+
+        .header{
+            width: 270px;
+            height: 70px;
+            background-color: darkcyan;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #E9945B;
+            opacity: 80%;
+
+        }
+        .header: hover{
+            opacity: 50%;
+        }
+        .develop{
+            width: 244px;
+            height: 40px;
+            /*border: 1px solid cyan;*/
+            position: relative;
+            margin-left: 79%;
+            /*margin-left: 78%;
+            margin-bottom: -10px;*/
+            margin-top: -44px;
+            
+            font-size: 10px;
+            padding: 8px;
+            font-weight: bold;
+            color: white;
+            background-color: darkcyan;
+            display: none;
+        }
+        .develop:hover{
+            cursor: pointer;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+   <div class="header">
+       <h1 style="font-size: 22px;padding-top:20px;margin-left: 19px;font-weight: bold;">TIC-TAC-TOE GAME!</h1>
+   </div>
+    <div class="main">
+        <div class="box" onclick="turn(1)">
+            <div class="zero one">O</div>
+            <div class="cross" >X</div>
+        </div>
+        <div class="box" onclick="turn(2)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(3)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(4)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(5)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(6)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(7)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(8)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+        <div class="box" onclick="turn(9)">
+            <div class="zero">O</div>
+            <div class="cross">X</div>
+        </div>
+    </div>
+
+    <div class="winner">
+        <div class="awin"> PLAYER A WINS!</div>
+        <div class="bwin"> PLAYER B WINS!</div>
+    </div>
+    <button class="newgame" onclick="restart()" >NEW GAME</button>
+    <div class="develop">
+        <h1>Developed By: Avijit Rana</h1>
+    </div>
+    <script>
+        var arr = [
+            [0,0,0],
+            [0,0,0],
+            [0,0,0]
+        ];
+        var a = 0;
+        var win = false;
+        function turn(i){
+            if(a==0){
+                switch(i){
+                    case 1: document.getElementsByClassName('zero')[0].style.display="block"; arr[0][0]=1;break;
+                    case 2: document.getElementsByClassName('zero')[1].style.display="block"; arr[0][1]=1;break;
+                    case 3: document.getElementsByClassName('zero')[2].style.display="block"; arr[0][2]=1;break;
+                    case 4: document.getElementsByClassName('zero')[3].style.display="block";arr[1][0]=1;break;
+                    case 5: document.getElementsByClassName('zero')[4].style.display="block";arr[1][1]=1;break;
+                    case 6: document.getElementsByClassName('zero')[5].style.display="block";arr[1][2]=1;break;
+                    case 7: document.getElementsByClassName('zero')[6].style.display="block";arr[2][0]=1;break;
+                    case 8: document.getElementsByClassName('zero')[7].style.display="block";arr[2][1]=1;break;
+                    case 9: document.getElementsByClassName('zero')[8].style.display="block";arr[2][2]=1;break;
+                    
+                }
+                a=1;
+            }
+            else{
+                switch(i){
+                    case 1: document.getElementsByClassName('cross')[0].style.display="block"; arr[0][0]=2;break;
+                    case 2: document.getElementsByClassName('cross')[1].style.display="block"; arr[0][1]=2;break;
+                    case 3: document.getElementsByClassName('cross')[2].style.display="block"; arr[0][2]=2;break;
+                    case 4: document.getElementsByClassName('cross')[3].style.display="block"; arr[1][0]=2;break;
+                    case 5: document.getElementsByClassName('cross')[4].style.display="block"; arr[1][1]=2;break;
+                    case 6: document.getElementsByClassName('cross')[5].style.display="block"; arr[1][2]=2;break;
+                    case 7: document.getElementsByClassName('cross')[6].style.display="block"; arr[2][0]=2;break;
+                    case 8: document.getElementsByClassName('cross')[7].style.display="block"; arr[2][1]=2;break;
+                    case 9: document.getElementsByClassName('cross')[8].style.display="block"; arr[2][2]=2;break;
+                    
+                }
+                a=0;
+            }
+            ifwin();
+            if(win==false){
+                if(ifdraw()){
+                draw();
+            }
+            }
+        }
+        function ifwin(){
+            console.log(arr);
+            if(arr[0][0]==arr[0][1] && arr[0][0]==arr[0][2]) winner(arr[0][0]);
+            if(arr[1][0]==arr[1][1] && arr[1][0]==arr[1][2]) winner(arr[1][0]);
+            if(arr[2][0]==arr[2][1] && arr[2][0]==arr[2][2]) winner(arr[2][0]);
+            if(arr[0][0]==arr[1][0] && arr[0][0]==arr[2][0]) winner(arr[0][0]);
+            if(arr[0][1]==arr[1][1] && arr[0][1]==arr[2][1]) winner(arr[0][1]);
+            if(arr[0][2]==arr[1][2] && arr[0][2]==arr[2][2]) winner(arr[0][2]);
+            if(arr[0][0]==arr[1][1] && arr[0][0]==arr[2][2]) winner(arr[0][0]);
+            if(arr[0][2]==arr[1][1] && arr[0][2]==arr[2][0]) winner(arr[0][2]);
+        }
+        function winner(j){
+            if(j==1){
+                console.log("A is winner");
+                document.getElementsByClassName('awin')[0].style.display="block";
+                document.getElementsByClassName('newgame')[0].style.display="block";
+                document.getElementsByClassName('develop')[0].style.display="block";
+                win = true;
+            }
+            if(j==2){
+                console.log("B is winner");
+                document.getElementsByClassName('bwin')[0].style.display="block";
+                document.getElementsByClassName('newgame')[0].style.display="block";
+                document.getElementsByClassName('develop')[0].style.display="block";
+                win = true;
+            }
+        }
+        function restart(){
+            location.reload();
+        }
+        function ifdraw(){
+            var res = false;
+            for(let i=0; i<3; i++){
+                for(let j=0; j<3; j++){
+                    if(arr[i][j]!=0){
+                        res = true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
+            return res;
+        }
+        function draw(){
+            document.getElementsByClassName('bwin')[0].style.display="block";
+            document.getElementsByClassName('bwin')[0].style.backgroundColor="orange";
+            document.getElementsByClassName('bwin')[0].innerHTML='Draw Match!';
+            document.getElementsByClassName('newgame')[0].style.display="block";
+            document.getElementsByClassName('develop')[0].style.display="block";
+        }
+
+    </script>
+</body>
+</html>
